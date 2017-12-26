@@ -86,5 +86,9 @@ void			ft_lstprint(t_list *list);
 void			ft_tabprint(char **tab);
 void			ft_lstpushback(t_list *lst, t_list *new);
 t_list			*ft_lstaddlink(t_list *lst, char *content, size_t content_size);
+void			ft_putunbr(unsigned int n);
+void			ft_putnbr_hex(unsigned int n);
+void			ft_putnbr_oct(unsigned int n);
+void			ft_putnbr_mhex(unsigned int n);
 
 #endif

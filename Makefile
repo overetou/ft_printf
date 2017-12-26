@@ -14,7 +14,9 @@ NAME = printf
 
 LIB = libft.a
 
-FUNC = src/ft_printf.c
+SRC = ft_printf.c
+
+OBJ = ft_printf.o
 
 FLAG = -Werror -Wextra -Wall 
 
@@ -22,9 +24,9 @@ FLAG = -Werror -Wextra -Wall
 
 all: $(NAME)
 
-$(NAME):
-	@clang -c main.c -I includes/ 
-	@clang -o $(NAME) main.o $(FUNC) -I libft/ -L libft/ -lft
+$(NAME): $(LIB)
+	@clang -c main.c $(SRC) -I libft/
+	@clang -o $(NAME) main.o $(OBJ) -I libft/ -L libft/ -lft
 	./$(NAME)
 
 $(LIB):
