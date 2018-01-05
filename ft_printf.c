@@ -27,6 +27,10 @@ const char	*ft_process_flag(const char *format, va_list vlst)
 		ft_putnbr_oct(va_arg(vlst, unsigned int));
 	else if (*format == 'X')
 		ft_putnbr_mhex(va_arg(vlst, unsigned int));
+	else if (*format == 'C')
+		ft_putwchar((wchar_t)va_arg(vlst, wchar_t*));
+	else if (*format == 'S')
+		ft_putwstr(va_arg(vlst, wchar_t*));
 	return (format + x);
 }
 
