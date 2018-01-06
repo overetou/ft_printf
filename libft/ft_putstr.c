@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "libft.h"
 
-void		ft_putstr(char const *s)
+size_t	ft_putstr(char const *s)
 {
 	int x;
 
@@ -23,4 +23,5 @@ void		ft_putstr(char const *s)
 		ft_putchar(s[x]);
 		x++;
 	}
+	return (x);
 }
