@@ -12,6 +12,10 @@
 
 NAME = libftprintf.a
 
+CFLAGS = -Wall -Werror -Wextra
+
+CC = gcc
+
 LIB_PATH = ./libft/
 
 SRC_PATH = ./src/
@@ -35,7 +39,7 @@ LIB_FILE = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_putnbr_oct.c ft_putnbr_mhex.c ft_power.c ft_makestr.c \
 	ft_putwchar.c ft_putwstr.c ft_strfuse.c
 
-SRC_FILE = ft_printf.c
+SRC_FILE = ft_printf.c ft_nbr_to_str.c ft_addchar.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 
@@ -48,8 +52,8 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_FILE))
 all: $(NAME)
 
 $(NAME):
-	gcc -Werror -Wextra -Wall -c $(SRC) -I ./inc
-	gcc -Werror -Wextra -Wall -c $(LIB) -I $(LIB_PATH)
+	$(CC) $(CFLAGS) -c $(SRC) -I ./inc
+	$(CC) $(CFLAGS) -c $(LIB) -I $(LIB_PATH)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

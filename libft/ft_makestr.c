@@ -16,6 +16,10 @@ char	*ft_makestr(char *content)
 {
 	char *new;
 
+	if (!content)
+	{
+		return (ft_makestr("(null)"));
+	}
 	new = ft_strnew(ft_strlen(content) - 1);
 	ft_strcpy(new, content);
 	return (new);

@@ -2,10 +2,9 @@
 
 int main(void)
 {
-	char p[] = "yoyoyo";
+	//char p[] = "yoyoyo\n";
 
-	printf("%p", p);
-	printf("%II#x", p);
+	ft_putnbr(printf("Salut %s!", NULL));
 	return (0);	
 }
 

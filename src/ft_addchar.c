@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_addchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/22 19:26:56 by overetou          #+#    #+#             */
-/*   Updated: 2017/12/22 19:44:21 by overetou         ###   ########.fr       */
+/*   Created: 2018/01/07 20:16:49 by overetou          #+#    #+#             */
+/*   Updated: 2018/01/07 20:16:54 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "../libft/libft.h"
+#include <ft_printf.h>
 
-int ft_printf(char const *format, ...);
-char	*ft_nbr_to_str(int n);
-char	*ft_addchar(char **str, char c);
+char	*ft_addchar(char **str, char c)
+{
+	char *new;
+	int i = 0;
 
-#endif
+	new = ft_strfuse(str, "0");
+	while (new[i])
+		i++;
+	new[i - 1] = c;
+	return (new);
+}
