@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_makestr.c                                       :+:      :+:    :+:   */
+/*   ft_unbr_to_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/06 18:40:26 by overetou          #+#    #+#             */
-/*   Updated: 2018/01/06 18:40:31 by overetou         ###   ########.fr       */
+/*   Created: 2018/01/08 15:06:12 by overetou          #+#    #+#             */
+/*   Updated: 2018/01/08 15:06:15 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <ft_printf.h>
 
-char	*ft_makestr(char *content, int *sz)
+char	*ft_unbr_to_str(size_t n, int *sz)
 {
-	char *new;
+	size_t	mem;
+	size_t	div;
+	char	*rvalue;
 
-	if (!content)
+	rvalue = ft_strnew(0);
+	div = 1;
+	while (n / div >= 10)
+		div = div * 10;
+	while (div != 0)
 	{
-		*sz = 6;
-		return (ft_makestr("(null)", sz));
+		mem = (n / div);
+		rvalue = ft_addchar(&rvalue, (mem + '0'));
+		n = n - (mem * div);
+		div = div / 10;
 	}
-	new = ft_strnew(ft_strlen(content) - 1);
-	ft_strcpy(new, content);
-	*sz = ft_strlen(new);
-	return (new);
+	*sz = ft_strlen(rvalue);
+	return (rvalue);
 }

@@ -93,7 +93,7 @@ void			ft_putnbr_hex(unsigned int n);
 void			ft_putnbr_oct(unsigned int n);
 void			ft_putnbr_mhex(unsigned int n);
 int				ft_power(int base, int power);
-char			*ft_makestr(char *content);
+char			*ft_makestr(char *content, int *sz);
 void			ft_putwchar(wchar_t wc);
 void			ft_putwstr(wchar_t *str);
 char			*ft_strfuse(char **str1, char *str2);

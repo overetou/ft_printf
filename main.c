@@ -4,7 +4,8 @@ int main(void)
 {
 	//char p[] = "yoyoyo\n";
 
-	ft_putnbr(printf("Salut %s!", NULL));
+	ft_putchar(0);
+	//ft_putnbr(printf("%c\n", 0));
 	return (0);	
 }
 

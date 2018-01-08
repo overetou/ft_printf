@@ -12,7 +12,7 @@
 
 #include <ft_printf.h>
 
-char	*ft_nbr_to_str(int n)
+char	*ft_nbr_to_str(int n, int *sz)
 {
 	int		mem;
 	size_t	div;
@@ -22,7 +22,7 @@ char	*ft_nbr_to_str(int n)
 	if (n < 0)
 	{
 		if (n == -2147483648)
-			return (ft_makestr("-2147483648"));
+			return (ft_makestr("-2147483648", sz));
 		rvalue = ft_addchar(&rvalue, '-');
 		n = -n;
 	}
@@ -36,5 +36,6 @@ char	*ft_nbr_to_str(int n)
 		n = n - (mem * div);
 		div = div / 10;
 	}
+	*sz = ft_strlen(rvalue);
 	return (rvalue);
 }

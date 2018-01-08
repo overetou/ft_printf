@@ -37,9 +37,10 @@ LIB_FILE = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_lstprint.c ft_tabprint.c ft_lstpushback.c ft_lstaddlink.c \
 	ft_atoi.c ft_lstaddnext.c ft_putunbr.c ft_putnbr_hex.c \
 	ft_putnbr_oct.c ft_putnbr_mhex.c ft_power.c ft_makestr.c \
-	ft_putwchar.c ft_putwstr.c ft_strfuse.c
+	ft_putwstr.c ft_strfuse.c
 
-SRC_FILE = ft_printf.c ft_nbr_to_str.c ft_addchar.c
+SRC_FILE = ft_printf.c ft_nbr_to_str.c ft_addchar.c ft_unbr_to_str.c \
+	ft_char_to_str.c ft_strnput.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 
