@@ -12,11 +12,12 @@
 
 #include "libft.h"
 
-void	ft_putnbr_mhex(unsigned int n)
+int	ft_putnbr_mhex(unsigned int n, int i)
 {
 	char	base[] = "0123456789ABCDEF";
 	
 	if (n / 16 != 0)
-		ft_putnbr_mhex(n / 16);
+		i = ft_putnbr_mhex(n / 16, i);
 	ft_putchar(base[n % 16]);
+	return (i + 1);
 }

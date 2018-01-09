@@ -13,24 +13,29 @@
 #include <unistd.h>
 #include "libft.h"
 
-void		ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
 	int				mem;
 	unsigned int	div;
+	int				i;
 
+	i = 0;
 	if (n < 0)
 	{
 		ft_putchar('-');
 		n = -n;
+		i++;
 	}
 	div = 1;
 	while (n / div >= 10)
 		div = div * 10;
-	while (div >= 1)
+	while (div != 0)
 	{
 		mem = (n / div);
 		ft_putchar(mem + '0');
 		n = n - (mem * div);
 		div = div / 10;
+		i++;
 	}
+	return (i);
 }

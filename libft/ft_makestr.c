@@ -12,17 +12,13 @@
 
 #include "libft.h"
 
-char	*ft_makestr(char *content, int *sz)
+char	*ft_makestr(char *content)
 {
 	char *new;
 
 	if (!content)
-	{
-		*sz = 6;
-		return (ft_makestr("(null)", sz));
-	}
+		return (ft_makestr("(null)"));
 	new = ft_strnew(ft_strlen(content) - 1);
 	ft_strcpy(new, content);
-	*sz = ft_strlen(new);
 	return (new);
 }

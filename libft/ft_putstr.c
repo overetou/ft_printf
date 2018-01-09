@@ -13,15 +13,17 @@
 #include <unistd.h>
 #include "libft.h"
 
-size_t	ft_putstr(char const *s)
+int	ft_putstr(char const *s)
 {
-	int x;
+	int i;
 
-	x = 0;
-	while (s[x])
+	i = 0;
+	if (!s)
 	{
-		ft_putchar(s[x]);
-		x++;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	return (x);
+	while (s[i])
+		ft_putchar(s[i++]);
+	return (i);
 }

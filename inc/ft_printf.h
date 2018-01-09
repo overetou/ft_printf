@@ -20,5 +20,6 @@ char	*ft_addchar(char **str, char c);
 char	*ft_unbr_to_str(size_t n, int *sz);
 char	*ft_char_to_str(char c, int *sz);
 void	ft_strnput(char *str, int n);
+int		ft_putnbr_lhex(long int n);
 
 #endif

@@ -22,7 +22,7 @@ char	*ft_nbr_to_str(int n, int *sz)
 	if (n < 0)
 	{
 		if (n == -2147483648)
-			return (ft_makestr("-2147483648", sz));
+			return (ft_makestr("-2147483648"));
 		rvalue = ft_addchar(&rvalue, '-');
 		n = -n;
 	}

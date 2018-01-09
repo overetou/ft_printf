@@ -12,11 +12,12 @@
 
 #include "libft.h"
 
-void	ft_putnbr_oct(unsigned int n)
+int	ft_putnbr_oct(unsigned int n, int i)
 {
 	char	base[] = "01234567";
 	
 	if (n / 8 != 0)
-		ft_putnbr_oct(n / 8);
+		i = ft_putnbr_oct(n / 8, i);
 	ft_putchar(base[n % 8]);
+	return (i + 1);
 }

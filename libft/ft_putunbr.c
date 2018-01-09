@@ -12,19 +12,23 @@
 
 #include "libft.h"
 
-void		ft_putunbr(unsigned int n)
+int		ft_putunbr(unsigned int n)
 {
-	unsigned int	mult;
-	unsigned int	res;
+	int				mem;
+	unsigned int	div;
+	int				i;
 
-	mult = 1;
-	while (n / mult > 10)
-		mult *= 10;
-	while (mult != 0)
+	i = 0;
+	div = 1;
+	while (n / div >= 10)
+		div = div * 10;
+	while (div != 0)
 	{
-		res = n / mult;
-		ft_putchar(res + '0');
-		n = n - (res * mult);
-		mult = mult / 10;
+		mem = (n / div);
+		ft_putchar(mem + '0');
+		n = n - (mem * div);
+		div = div / 10;
+		i++;
 	}
+	return (i);
 }

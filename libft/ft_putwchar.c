@@ -98,7 +98,7 @@ char	*ft_generate_mask(size_t b_size)
 	return (oct);
 }
 
-void	ft_putwchar(wchar_t wc)
+int	ft_putwchar(wchar_t wc)
 {
     char	*bin;
     size_t	b_size;
@@ -110,7 +110,7 @@ void	ft_putwchar(wchar_t wc)
     if (b_size < 8)
     {
     	ft_putchar(wc);
-    	return ;
+    	return (1);
     }
     else
     	oct = ft_generate_mask(b_size);
@@ -122,4 +122,5 @@ void	ft_putwchar(wchar_t wc)
     	write(1, &c, 1);
     }
     ft_strdel(&oct);
+    return (1);
 }
