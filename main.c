@@ -1,15 +1,14 @@
 #include "inc/ft_printf.h"
+#include <limits.h>
 
 int main(void)
 {
 	char p[] = "yoyoyo\n";
-	int i = 5;
+	int i;
 	//wchar_t
 
-	i = (ft_printf("%p\n", &i));
-	ft_putnbr(i);
-	ft_putchar('\n');
-	i = (printf("%p\n", &i));
+	//ft_printf("%p", &i);
+	i = printf("%C", 'c');
 	ft_putnbr(i);
 	return (0);	
 }

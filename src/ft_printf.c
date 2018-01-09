@@ -34,6 +34,12 @@ size_t	ft_process_flag(const char *format, va_list vlst)
 		i = ft_putwchar((wchar_t)va_arg(vlst, wchar_t*));
 	else if (*format == 'p')
 		i = ft_putnbr_lhex(va_arg(vlst, long int));
+	else if (*format == 'D')
+		i = ft_putnbr_l(va_arg(vlst, long int));
+	else if (*format == 'O')
+		i = ft_putnbr_loct(va_arg(vlst,unsigned long int), 0);
+	else if (*format == 'U')
+		i = ft_putunbr_l(va_arg(vlst, unsigned long int));
 	//else if (*format == 'S')
 	//	ft_putwstr(va_arg(vlst, wchar_t*));
 	else

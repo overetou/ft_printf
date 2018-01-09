@@ -12,6 +12,6 @@ static int	ft_put_pointer(long int n, int i)
 
 int			ft_putnbr_lhex(long int n)
 {
-	ft_putstr("0X");
+	ft_putstr("0x");
 	return (ft_put_pointer(n, 2));
 }
