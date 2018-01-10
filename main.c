@@ -3,12 +3,12 @@
 
 int main(void)
 {
-	char p[] = "yoyoyo\n";
+	//wchar_t p = 0;
 	int i;
-	//wchar_t
 
 	//ft_printf("%p", &i);
-	i = printf("%C", 'c');
+	//i = prinft(1, "%u\n", L'α');
+	i = printf("{% %}");
 	ft_putnbr(i);
 	return (0);	
 }

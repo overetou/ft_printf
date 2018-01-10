@@ -24,5 +24,7 @@ int		ft_putnbr_lhex(long int n);
 int		ft_putnbr_l(long int n);
 int		ft_putnbr_loct(unsigned long int n, int i);
 int		ft_putunbr_l(unsigned long int n);
+int		ft_putwstr(wchar_t *wstr);
+size_t	ft_process_flag(const char *format, va_list vlst);
 
 #endif
