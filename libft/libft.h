@@ -89,12 +89,12 @@ void			ft_tabprint(char **tab);
 void			ft_lstpushback(t_list *lst, t_list *new);
 t_list			*ft_lstaddlink(t_list *lst, char *content, size_t content_size);
 int				ft_putunbr(unsigned int n);
-int				ft_putnbr_hex(unsigned int n, int i);
-int				ft_putnbr_oct(unsigned int n, int i);
-int				ft_putnbr_mhex(unsigned int n, int i);
+int				ft_putnbr_hex(unsigned int n, int to_print);
+int				ft_putnbr_oct(unsigned int n, int to_print);
+int				ft_putnbr_mhex(unsigned int n, int to_print);
 int				ft_power(int base, int power);
 char			*ft_makestr(char *content);
-int			ft_putwchar(wchar_t wc);
+int				ft_putwchar(wchar_t wc);
 char			*ft_strfuse(char **str1, char *str2);
 
 #endif

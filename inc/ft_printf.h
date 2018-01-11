@@ -22,9 +22,9 @@ char	*ft_char_to_str(char c, int *sz);
 void	ft_strnput(char *str, int n);
 int		ft_putnbr_lhex(long int n);
 int		ft_putnbr_l(long int n);
-int		ft_putnbr_loct(unsigned long int n, int i);
+int		ft_putnbr_loct(unsigned long int n, int to_print);
 int		ft_putunbr_l(unsigned long int n);
 int		ft_putwstr(wchar_t *wstr);
-size_t	ft_process_flag(const char *format, va_list vlst);
+int		ft_process_flag(const char **format, va_list vlst);
 
 #endif

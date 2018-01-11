@@ -28,7 +28,7 @@ int		ft_printf(char const *format, ...)
 		{
 			while (*(format + 1) == ' ')
 				format++;
-			s = ft_process_flag(++format, vlst);
+			s = ft_process_flag(&format, vlst);
 			if (s != -1)
 			{
 				i += s;

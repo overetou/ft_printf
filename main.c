@@ -3,12 +3,8 @@
 
 int main(void)
 {
-	//wchar_t p = 0;
 	int i;
-
-	//ft_printf("%p", &i);
-	//i = prinft(1, "%u\n", L'α');
-	i = printf("{% %}");
+	i = ft_printf("10 en octet = %#X.\n", 15);
 	ft_putnbr(i);
 	return (0);	
 }
