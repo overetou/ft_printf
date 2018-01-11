@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: overetou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 18:55:35 by overetou          #+#    #+#             */
-/*   Updated: 2017/11/15 18:55:38 by overetou         ###   ########.fr       */
+/*   Created: 2018/01/06 18:44:27 by overetou          #+#    #+#             */
+/*   Updated: 2018/01/06 18:44:32 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_putstr(char const *s)
+int		ft_putunbr(unsigned int n)
 {
-	int i;
+	int				mem;
+	unsigned int	div;
+	int				i;
 
 	i = 0;
-	if (!s)
+	div = 1;
+	while (n / div >= 10)
+		div = div * 10;
+	while (div != 0)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		mem = (n / div);
+		ft_putchar(mem + '0');
+		n = n - (mem * div);
+		div = div / 10;
+		i++;
 	}
-	while (s[i])
-		ft_putchar(s[i++]);
 	return (i);
 }

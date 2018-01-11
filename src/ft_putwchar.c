@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 #include <unistd.h>
 
 int	ft_putwchar(wchar_t wc)

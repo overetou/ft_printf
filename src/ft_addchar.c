@@ -15,11 +15,9 @@
 char	*ft_addchar(char **str, char c)
 {
 	char *new;
-	int i = 0;
+	char c_str[1];
 
-	new = ft_strfuse(str, "0");
-	while (new[i])
-		i++;
-	new[i - 1] = c;
+	c_str[0] = c;
+	new = ft_strfuse(str, c_str);
 	return (new);
 }

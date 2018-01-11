@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_process_flag.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/11 19:34:34 by overetou          #+#    #+#             */
+/*   Updated: 2018/01/11 19:34:36 by overetou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 char	ft_find_conv(const char *format)
@@ -11,7 +23,20 @@ char	ft_find_conv(const char *format)
 	return (*format);
 }
 
-int	ft_process_conv(char conv, va_list vlst, int to_print)
+char	*ft_find_flags(const char **format, char conv)
+{
+	char *new;
+
+	new = ft_strnew(0);
+	while (**format != conv)
+	{
+		new = ft_addchar(&new, **format);
+		(*format)++;
+	}
+	return (new);
+}
+
+int	ft_process_conv(char conv, va_list vlst, char *flags)
 {
 	int i;
 
@@ -19,7 +44,7 @@ int	ft_process_conv(char conv, va_list vlst, int to_print)
 	if (conv == 's')
 		i = ft_putstr(va_arg(vlst, char*));
 	else if (conv == 'd' || conv == 'i')
-		i = ft_putnbr(va_arg(vlst, int));
+		i = ft_putnbr(va_arg(vlst, int), flags);
 	else if (conv == 'u')
 		i = ft_putunbr(va_arg(vlst, unsigned int));
 	else if (conv == '%')
@@ -27,11 +52,11 @@ int	ft_process_conv(char conv, va_list vlst, int to_print)
 	else if (conv == 'c')
 		i = ft_putchar((char)va_arg(vlst, char*));
 	else if (conv == 'x')
-		i = ft_putnbr_hex(va_arg(vlst, unsigned int), to_print);
+		i = ft_putnbr_hex(va_arg(vlst, unsigned int), flags);
 	else if (conv == 'o')
-		i = ft_putnbr_oct(va_arg(vlst, unsigned int), to_print);
+		i = ft_putnbr_oct(va_arg(vlst, unsigned int), flags);
 	else if (conv == 'X')
-		i = ft_putnbr_mhex(va_arg(vlst, unsigned int), to_print);
+		i = ft_putnbr_mhex(va_arg(vlst, unsigned int), flags);
 	else if (conv == 'S')
 		i = ft_putwstr(va_arg(vlst, wchar_t*));
 	else if (conv == 'C')
@@ -41,45 +66,24 @@ int	ft_process_conv(char conv, va_list vlst, int to_print)
 	else if (conv == 'D')
 		i = ft_putnbr_l(va_arg(vlst, long int));
 	else if (conv == 'O')
-		i = ft_putnbr_loct(va_arg(vlst,unsigned long int), to_print);
+		i = ft_putnbr_loct(va_arg(vlst,unsigned long int), flags);
 	else if (conv == 'U')
 		i = ft_putunbr_l(va_arg(vlst, unsigned long int));
 	else
 		return (-1);
-	return (i);
-}
-
-int		ft_process_htag(const char **format, char *padding, char conv, int *to_print)
-{
-	int i;
-
-	i = 0;
-	(void)*padding;
-	if (**format == conv)
-		return (i);
-	if (**format == '#')
-	{
-		if (conv == 'o' || conv == 'O')
-			i += ft_putchar('0');
-		(*format)++;
-		*to_print = 0;
-	}
+	ft_strdel(&flags);
 	return (i);
 }
 
 int		ft_process_flag(const char **format, va_list vlst)
 {
-	int		i;
 	char	conv;
-	char	padding;
-	int		to_print;
+	char	*flags;
 
-	padding = ' ';
 	(*format)++;
-	to_print = -1;
-	if ((conv = ft_find_conv(*format)) == 0)
+	conv = ft_find_conv(*format);
+	if (conv == 0)
 		return (0);
-	i = ft_process_htag(format, &padding, conv, &to_print);
-	i += ft_process_conv(conv, vlst, to_print);
-	return (i);
+	flags = ft_find_flags(format, conv);
+	return (ft_process_conv(conv, vlst, flags));
 }

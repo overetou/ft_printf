@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_mhex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/06 18:42:15 by overetou          #+#    #+#             */
-/*   Updated: 2018/01/06 18:42:18 by overetou         ###   ########.fr       */
+/*   Created: 2018/01/06 18:42:41 by overetou          #+#    #+#             */
+/*   Updated: 2018/01/06 18:42:42 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static int	ft_process(unsigned int n, int i)
 {
-	char	base[] = "0123456789abcdef";
+	char	base[] = "0123456789ABCDEF";
 	
 	if (n / 16 != 0)
 		i = ft_process(n / 16, i);
@@ -22,12 +22,15 @@ static int	ft_process(unsigned int n, int i)
 	return (i + 1);
 }
 
-int	ft_putnbr_hex(unsigned int n, int to_print)
+int	ft_putnbr_mhex(unsigned int n, char *flags)
 {
 	int i;
 
 	i = 0;
-	if (n && !to_print)
-		i = ft_putstr("0x");
+	while (*flags)
+	{
+		if (*flags++ == '#' && n)
+			i = ft_putstr("0X");
+	}
 	return (ft_process(n, 0) + i);
 }

@@ -44,9 +44,7 @@ void			*ft_memset(void *b, int c, size_t len);
 int				ft_putchar(char c);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putendl(char const *s);
-int				ft_putnbr(int n);
 void			ft_putnbr_fd(int n, int fd);
-int				ft_putstr(char const *s);
 void			ft_putstr_fd(char const *s, int fd);
 char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strchr(const char *s, int c);
@@ -88,13 +86,8 @@ void			ft_lstprint(t_list *list);
 void			ft_tabprint(char **tab);
 void			ft_lstpushback(t_list *lst, t_list *new);
 t_list			*ft_lstaddlink(t_list *lst, char *content, size_t content_size);
-int				ft_putunbr(unsigned int n);
-int				ft_putnbr_hex(unsigned int n, int to_print);
-int				ft_putnbr_oct(unsigned int n, int to_print);
-int				ft_putnbr_mhex(unsigned int n, int to_print);
 int				ft_power(int base, int power);
 char			*ft_makestr(char *content);
-int				ft_putwchar(wchar_t wc);
 char			*ft_strfuse(char **str1, char *str2);
 
 #endif

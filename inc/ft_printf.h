@@ -22,9 +22,16 @@ char	*ft_char_to_str(char c, int *sz);
 void	ft_strnput(char *str, int n);
 int		ft_putnbr_lhex(long int n);
 int		ft_putnbr_l(long int n);
-int		ft_putnbr_loct(unsigned long int n, int to_print);
+int		ft_putnbr_loct(unsigned long int n, char *flags);
 int		ft_putunbr_l(unsigned long int n);
 int		ft_putwstr(wchar_t *wstr);
 int		ft_process_flag(const char **format, va_list vlst);
+int		ft_putnbr(int n, char *flags);
+int		ft_putstr(char const *s);
+int		ft_putunbr(unsigned int n);
+int		ft_putnbr_hex(unsigned int n, char *flags);
+int		ft_putnbr_oct(unsigned int n, char *flags);
+int		ft_putnbr_mhex(unsigned int n, char *flags);
+int		ft_putwchar(wchar_t wc);
 
 #endif

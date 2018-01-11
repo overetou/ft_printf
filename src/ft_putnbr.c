@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_putnbr(int n)
+static int	ft_process(int n)
 {
 	int				mem;
 	unsigned int	div;
@@ -37,4 +37,20 @@ int	ft_putnbr(int n)
 		i++;
 	}
 	return (i);
+}
+
+int	ft_putnbr(int n, char *flags)
+{
+	int i;
+
+	i = 0;
+	while (*flags)
+	{
+		if (*flags++ == '+')
+		{
+			if (n >= 0)
+				i = ft_putchar('+');
+		}
+	}
+	return (ft_process(n) + i);
 }

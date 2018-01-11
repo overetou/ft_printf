@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tests.c                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: overetou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/24 20:11:08 by overetou          #+#    #+#             */
-/*   Updated: 2017/11/24 20:11:11 by overetou         ###   ########.fr       */
+/*   Created: 2017/11/15 18:55:35 by overetou          #+#    #+#             */
+/*   Updated: 2017/11/15 18:55:38 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
+#include "ft_printf.h"
 
-void	ft_tests(char *s1, char *s2, char *titl)
+int	ft_putstr(char const *s)
 {
-	ft_putstr(titl);
-	if (ft_strcmp(s1, s2) == 0)
-		ft_putstr(": ok\n");
-	else
-		ft_putstr(": ko\n");
+	int i;
+
+	i = 0;
+	if (!s)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (s[i])
+		ft_putchar(s[i++]);
+	return (i);
 }
