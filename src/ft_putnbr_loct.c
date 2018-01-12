@@ -30,7 +30,10 @@ int	ft_putnbr_loct(unsigned long int n, char *flags)
 	while (*flags)
 	{
 		if (*flags++ == '#' && n)
+		{
 			i = ft_putstr("0");
+			break;
+		}
 	}
 	return (ft_process(n, 0) + i);
 }

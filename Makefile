@@ -43,8 +43,7 @@ SRC_FILE = ft_printf.c ft_nbr_to_str.c ft_addchar.c ft_unbr_to_str.c \
 	ft_char_to_str.c ft_strnput.c ft_putnbr_lhex.c ft_putnbr_l.c \
 	ft_putnbr_loct.c ft_putunbr_l.c ft_putwstr.c ft_process_flag.c \
 	ft_putstr.c ft_putnbr.c ft_putnbr_oct.c ft_putnbr_mhex.c \
-	ft_putunbr.c ft_putnbr_hex.c ft_putwchar.c
-
+	ft_putunbr.c ft_putnbr_hex.c ft_putwchar.c ft_detect.c ft_getwidth.c \
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 

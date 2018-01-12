@@ -38,8 +38,6 @@ int		ft_printf(char const *format, ...)
 		i += s;
 		if (*format)
 		{
-			while (*(format + 1) == ' ')
-				format++;
 			s = ft_process_flag(&format, vlst);
 			if (s != -1)
 			{

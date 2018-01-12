@@ -19,4 +19,5 @@ precision : indique pour toute valeur numerique le nombre minimum de chiffre qui
 
 specification de longueur : precise la longueur de ce que l'on souhaite convertir pour que tout se passe sans fracas. Par exemple si l'on souhaite afficher un caractere en sa valeur decimale.
 
-Ajouter les headers sur : ft_putunbr, ft_putnbr_hex
+architecture :
+fonction chargee de calculer l'espace : fonction : is there

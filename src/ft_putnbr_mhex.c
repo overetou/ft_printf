@@ -30,7 +30,10 @@ int	ft_putnbr_mhex(unsigned int n, char *flags)
 	while (*flags)
 	{
 		if (*flags++ == '#' && n)
+		{
 			i = ft_putstr("0X");
+			break;
+		}
 	}
 	return (ft_process(n, 0) + i);
 }

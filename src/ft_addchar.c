@@ -15,9 +15,10 @@
 char	*ft_addchar(char **str, char c)
 {
 	char *new;
-	char c_str[1];
+	char c_str[2];
 
 	c_str[0] = c;
+	c_str[1] = '\0';
 	new = ft_strfuse(str, c_str);
 	return (new);
 }
