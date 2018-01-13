@@ -44,11 +44,11 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	if (conv == 's')
 		i = ft_putstr(va_arg(vlst, char*));
 	else if (conv == 'd' || conv == 'i')
-		i = ft_putnbr(va_arg(vlst, int), flags);
+		i = ft_putnbr_printf(va_arg(vlst, int), flags);
 	else if (conv == 'u')
 		i = ft_putunbr(va_arg(vlst, unsigned int));
 	else if (conv == '%')
-		i = ft_putchar('%');
+		i = ft_putpercent(flags);
 	else if (conv == 'c')
 		i = ft_putchar((char)va_arg(vlst, char*));
 	else if (conv == 'x')

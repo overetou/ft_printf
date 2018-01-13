@@ -26,7 +26,7 @@ int		ft_putnbr_loct(unsigned long int n, char *flags);
 int		ft_putunbr_l(unsigned long int n);
 int		ft_putwstr(wchar_t *wstr);
 int		ft_process_flag(const char **format, va_list vlst);
-int		ft_putnbr(int n, char *flags);
+int		ft_putnbr_printf(int n, char *flags);
 int		ft_putstr(char const *s);
 int		ft_putunbr(unsigned int n);
 int		ft_putnbr_hex(unsigned int n, char *flags);
@@ -35,5 +35,6 @@ int		ft_putnbr_mhex(unsigned int n, char *flags);
 int		ft_putwchar(wchar_t wc);
 short	ft_detect(char *flags, char to_find);
 int		ft_getwidth(char *flags);
+int		ft_putpercent(char *flags);
 
 #endif

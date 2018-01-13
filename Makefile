@@ -33,7 +33,7 @@ LIB_FILE = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strsplit.c \
 	ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c \
 	ft_toupper.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-	ft_lstadd.c ft_lstiter.c ft_lstmap.c \
+	ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_putnbr.c\
 	ft_lstpushback.c ft_lstaddlink.c \
 	ft_atoi.c ft_lstaddnext.c \
 	ft_power.c ft_makestr.c \
@@ -42,8 +42,9 @@ LIB_FILE = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 SRC_FILE = ft_printf.c ft_nbr_to_str.c ft_addchar.c ft_unbr_to_str.c \
 	ft_char_to_str.c ft_strnput.c ft_putnbr_lhex.c ft_putnbr_l.c \
 	ft_putnbr_loct.c ft_putunbr_l.c ft_putwstr.c ft_process_flag.c \
-	ft_putstr.c ft_putnbr.c ft_putnbr_oct.c ft_putnbr_mhex.c \
+	ft_putstr.c ft_putnbr_printf.c ft_putnbr_oct.c ft_putnbr_mhex.c \
 	ft_putunbr.c ft_putnbr_hex.c ft_putwchar.c ft_detect.c ft_getwidth.c \
+	ft_putpercent.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 

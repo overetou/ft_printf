@@ -5,7 +5,7 @@ int main(void)
 {
 	int i;
 
-	i = ft_printf("%0+5d\n", 42);
+	i = ft_printf("%0+-5d\n", 42);
 	printf("%d", i);
 	return (0);	
 }

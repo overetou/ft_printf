@@ -89,5 +89,6 @@ t_list			*ft_lstaddlink(t_list *lst, char *content, size_t content_size);
 int				ft_power(int base, int power);
 char			*ft_makestr(char *content);
 char			*ft_strfuse(char **str1, char *str2);
+void			ft_putnbr(int n);
 
 #endif
