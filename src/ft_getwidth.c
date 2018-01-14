@@ -21,3 +21,13 @@ int	ft_getwidth(char *flags)
 	}
 	return (0);
 }
+
+int	ft_getprec(char *flags)
+{
+	while (*flags++)
+	{
+		if (*flags == '.')
+			return (ft_atoi(flags + 1));
+	}
+	return (0);
+}

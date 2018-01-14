@@ -11,8 +11,27 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <inttypes.h>
 
-char	ft_find_conv(const char *format)
+static int	ft_sort_decimal(char *flags, va_list vlst)
+{
+	if (ft_count(flags, 'h') == 1)
+		return (ft_putnbr_printf((short)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'h') == 2)
+		return (ft_putnbr_printf((signed char)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'z'))
+		return (ft_putnbr_l((ssize_t)va_arg(vlst, intmax_t), flags));
+	else if (ft_count(flags, 'l') == 1)
+		return (ft_putnbr_l((long int)va_arg(vlst, intmax_t), flags));
+	else if (ft_count(flags, 'l') == 2)
+		return (ft_putnbr_l((long long int)va_arg(vlst, intmax_t), flags));
+	else if (ft_detect(flags, 'j'))
+		return (ft_putnbr_l(va_arg(vlst, intmax_t), flags));
+	else
+		return (ft_putnbr_printf(va_arg(vlst, int), flags));
+}
+
+static char	ft_find_conv(const char *format)
 {
 	while (*format && *format != 's' && *format != 'd' && *format != 'i' && *format != 'u'
 		&& *format != '%' && *format != 'c' && *format != 'x' && *format != 'o'
@@ -23,7 +42,7 @@ char	ft_find_conv(const char *format)
 	return (*format);
 }
 
-char	*ft_find_flags(const char **format, char conv)
+static char	*ft_find_flags(const char **format, char conv)
 {
 	char *new;
 
@@ -44,7 +63,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	if (conv == 's')
 		i = ft_putstr(va_arg(vlst, char*));
 	else if (conv == 'd' || conv == 'i')
-		i = ft_putnbr_printf(va_arg(vlst, int), flags);
+		i = ft_sort_decimal(flags, vlst);
 	else if (conv == 'u')
 		i = ft_putunbr(va_arg(vlst, unsigned int));
 	else if (conv == '%')
@@ -64,7 +83,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'p')
 		i = ft_putnbr_lhex(va_arg(vlst, long int));
 	else if (conv == 'D')
-		i = ft_putnbr_l(va_arg(vlst, long int));
+		i = ft_putnbr_l(va_arg(vlst, long int), flags);
 	else if (conv == 'O')
 		i = ft_putnbr_loct(va_arg(vlst,unsigned long int), flags);
 	else if (conv == 'U')

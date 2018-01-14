@@ -13,7 +13,29 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-static void ft_handle_null(char *flags, char **padding, char **to_dsp, char **to_del)
+int		ft_add_precision(int i, int prec, char **to_dsp)
+{
+	char *to_add;
+	char *to_del;
+
+	if ((prec > i) <= 0)
+		return (i);
+	to_add = ft_strnew(0);
+	if (**to_dsp == '+' || **to_dsp == '-')
+	{
+		to_add = ft_addchar(&to_add, **to_dsp);
+		**to_dsp = '0';
+		prec--;
+	}
+	while (prec > i++)
+		to_add = ft_addchar(&to_add, '0');
+	to_del = *to_dsp;
+	*to_dsp = ft_strfuse(&to_add, *to_dsp);
+	ft_strdel(&to_del);
+	return (i);
+}
+
+void	ft_handle_null(char *flags, char **padding, char **to_dsp, char **to_del)
 {
 	*to_del = ft_makestr(" ");
 	if (ft_detect(flags, '0') && !ft_detect(flags, '-'))
@@ -27,7 +49,7 @@ static void ft_handle_null(char *flags, char **padding, char **to_dsp, char **to
 	}
 }
 
-static int ft_handle_wdth(int width, char **padding, char **to_del, char **to_dsp)
+int		ft_handle_wdth(int width, char **padding, char **to_del, char **to_dsp)
 {
 	int i;
 
@@ -47,7 +69,7 @@ static int ft_handle_wdth(int width, char **padding, char **to_del, char **to_ds
 	return (i);
 }
 
-static int ft_padding_right(char **to_dsp, int width, int i)
+int ft_padding_right(char **to_dsp, int width, int i)
 {
 	ft_putstr(*to_dsp);
 	ft_strdel(to_dsp);
@@ -109,7 +131,7 @@ int	ft_putnbr_printf(int n, char *flags)
 	to_dsp = ft_strnew(0);
 	padding = ft_makestr(" ");
 	i = ft_sign_cases(&n, flags, &to_dsp);
-	i += ft_process(n, &to_dsp);
+	i += ft_add_precision(ft_process(n, &to_dsp), ft_getprec(flags), &to_dsp);
 	if ((width = ft_getwidth(flags) - i) > 0)
 	{
 		if (ft_detect(flags, '-'))
