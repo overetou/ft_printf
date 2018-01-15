@@ -24,10 +24,10 @@ int	ft_getwidth(char *flags)
 
 int	ft_getprec(char *flags)
 {
-	while (*flags++)
+	while (*flags)
 	{
-		if (*flags == '.')
-			return (ft_atoi(flags + 1));
+		if (*flags++ == '.')
+			return (ft_atoi(flags));
 	}
 	return (0);
 }

@@ -18,17 +18,26 @@ int		ft_add_precision(int i, int prec, char **to_dsp)
 	char *to_add;
 	char *to_del;
 
-	if ((prec > i) <= 0)
+	if (prec == 0)
+	{
+		ft_strdel(to_dsp);
+		*to_dsp = ft_makestr("");
+		return (0);
+	}
+	if (prec <= i)
 		return (i);
 	to_add = ft_strnew(0);
 	if (**to_dsp == '+' || **to_dsp == '-')
 	{
 		to_add = ft_addchar(&to_add, **to_dsp);
 		**to_dsp = '0';
-		prec--;
+		i++;
 	}
-	while (prec > i++)
+	while (prec > i)
+	{
+		i++;
 		to_add = ft_addchar(&to_add, '0');
+	}
 	to_del = *to_dsp;
 	*to_dsp = ft_strfuse(&to_add, *to_dsp);
 	ft_strdel(&to_del);

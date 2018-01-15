@@ -14,9 +14,10 @@
 # define FT_PRINTF_H
 # include "../libft/libft.h"
 #include <inttypes.h>
+#include <stdarg.h>
 
 
-int ft_printf(char const *format, ...);
+int		ft_printf(char const *format, ...);
 char	*ft_nbr_to_str(int n, int *sz);
 char	*ft_addchar(char **str, char c);
 char	*ft_unbr_to_str(size_t n, int *sz);

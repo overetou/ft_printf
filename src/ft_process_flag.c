@@ -20,15 +20,14 @@ static int	ft_sort_decimal(char *flags, va_list vlst)
 	else if (ft_count(flags, 'h') == 2)
 		return (ft_putnbr_printf((signed char)va_arg(vlst, int), flags));
 	else if (ft_count(flags, 'z'))
-		return (ft_putnbr_l((ssize_t)va_arg(vlst, intmax_t), flags));
+		return (ft_putnbr_l((size_t)va_arg(vlst, intmax_t), flags));
 	else if (ft_count(flags, 'l') == 1)
 		return (ft_putnbr_l((long int)va_arg(vlst, intmax_t), flags));
 	else if (ft_count(flags, 'l') == 2)
 		return (ft_putnbr_l((long long int)va_arg(vlst, intmax_t), flags));
 	else if (ft_detect(flags, 'j'))
 		return (ft_putnbr_l(va_arg(vlst, intmax_t), flags));
-	else
-		return (ft_putnbr_printf(va_arg(vlst, int), flags));
+	return (ft_putnbr_printf(va_arg(vlst, int), flags));
 }
 
 static char	ft_find_conv(const char *format)
@@ -69,7 +68,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == '%')
 		i = ft_putpercent(flags);
 	else if (conv == 'c')
-		i = ft_putchar((char)va_arg(vlst, char*));
+		i = ft_putchar(*va_arg(vlst, char*));
 	else if (conv == 'x')
 		i = ft_putnbr_hex(va_arg(vlst, unsigned int), flags);
 	else if (conv == 'o')
@@ -79,7 +78,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'S')
 		i = ft_putwstr(va_arg(vlst, wchar_t*));
 	else if (conv == 'C')
-		i = ft_putwchar((wchar_t)va_arg(vlst, wchar_t*));
+		i = ft_putwchar(*va_arg(vlst, wchar_t*));
 	else if (conv == 'p')
 		i = ft_putnbr_lhex(va_arg(vlst, long int));
 	else if (conv == 'D')
