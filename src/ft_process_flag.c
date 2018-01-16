@@ -13,14 +13,14 @@
 #include "ft_printf.h"
 #include <inttypes.h>
 
-static int	ft_sort_decimal(char *flags, va_list vlst)
+static int	ft_sort_di(char *flags, va_list vlst)
 {
 	if (ft_count(flags, 'h') == 1)
 		return (ft_putnbr_printf((short)va_arg(vlst, int), flags));
 	else if (ft_count(flags, 'h') == 2)
 		return (ft_putnbr_printf((signed char)va_arg(vlst, int), flags));
 	else if (ft_count(flags, 'z'))
-		return (ft_putnbr_l((ssize_t)va_arg(vlst, intmax_t), flags));
+		return (ft_putnbr_l((size_t)va_arg(vlst, intmax_t), flags));
 	else if (ft_count(flags, 'l') == 1)
 		return (ft_putnbr_l((long int)va_arg(vlst, intmax_t), flags));
 	else if (ft_count(flags, 'l') == 2)
@@ -29,6 +29,42 @@ static int	ft_sort_decimal(char *flags, va_list vlst)
 		return (ft_putnbr_l(va_arg(vlst, intmax_t), flags));
 	else
 		return (ft_putnbr_printf(va_arg(vlst, int), flags));
+}
+
+static int ft_sort_u(char *flags, va_list vlst)
+{
+	if (ft_count(flags, 'h') == 1)
+		return (ft_putunbr((unsigned short)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'h') == 2)
+		return (ft_putunbr((unsigned char)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'z'))
+		return (ft_putunbr_l((size_t)va_arg(vlst, uintmax_t), flags));
+	else if (ft_count(flags, 'l') == 1)
+		return (ft_putunbr_l((unsigned long int)va_arg(vlst, uintmax_t), flags));
+	else if (ft_count(flags, 'l') == 2)
+		return (ft_putunbr_l((unsigned long long int)va_arg(vlst, uintmax_t), flags));
+	else if (ft_detect(flags, 'j'))
+		return (ft_putunbr_l(va_arg(vlst, uintmax_t), flags));
+	else
+		return (ft_putunbr(va_arg(vlst, unsigned int), flags));
+}
+
+static int ft_sort_o(char *flags, va_list vlst)
+{
+	if (ft_count(flags, 'h') == 1)
+		return (ft_putnbr_oct((unsigned short)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'h') == 2)
+		return (ft_putnbr_oct((unsigned char)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'z'))
+		return (ft_putnbr_loct((size_t)va_arg(vlst, uintmax_t), flags));
+	else if (ft_count(flags, 'l') == 1)
+		return (ft_putnbr_loct((unsigned long int)va_arg(vlst, uintmax_t), flags));
+	else if (ft_count(flags, 'l') == 2)
+		return (ft_putnbr_loct((unsigned long long int)va_arg(vlst, uintmax_t), flags));
+	else if (ft_detect(flags, 'j'))
+		return (ft_putnbr_loct(va_arg(vlst, uintmax_t), flags));
+	else
+		return (ft_putnbr_oct(va_arg(vlst, unsigned int), flags));
 }
 
 static char	ft_find_conv(const char *format)
@@ -63,9 +99,9 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	if (conv == 's')
 		i = ft_putstr(va_arg(vlst, char*));
 	else if (conv == 'd' || conv == 'i')
-		i = ft_sort_decimal(flags, vlst);
+		i = ft_sort_di(flags, vlst);
 	else if (conv == 'u')
-		i = ft_putunbr(va_arg(vlst, unsigned int));
+		i = ft_sort_u(flags, vlst);
 	else if (conv == '%')
 		i = ft_putpercent(flags);
 	else if (conv == 'c')
@@ -73,7 +109,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'x')
 		i = ft_putnbr_hex(va_arg(vlst, unsigned int), flags);
 	else if (conv == 'o')
-		i = ft_putnbr_oct(va_arg(vlst, unsigned int), flags);
+		i = ft_sort_o(flags, vlst);
 	else if (conv == 'X')
 		i = ft_putnbr_mhex(va_arg(vlst, unsigned int), flags);
 	else if (conv == 'S')
@@ -87,7 +123,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'O')
 		i = ft_putnbr_loct(va_arg(vlst,unsigned long int), flags);
 	else if (conv == 'U')
-		i = ft_putunbr_l(va_arg(vlst, unsigned long int));
+		i = ft_putunbr_l(va_arg(vlst, unsigned long int), flags);
 	else
 		return (-1);
 	ft_strdel(&flags);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_printf.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: overetou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,24 +11,26 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int		ft_add_precision(int i, int prec, char **to_dsp)
 {
 	char *to_add;
 	char *to_del;
 
-	if ((prec > i) <= 0)
+	if (prec <= i)
 		return (i);
 	to_add = ft_strnew(0);
-	if (**to_dsp == '+' || **to_dsp == '-')
+	if (**to_dsp == '+' || **to_dsp == '-' || **to_dsp == ' ')
 	{
 		to_add = ft_addchar(&to_add, **to_dsp);
 		**to_dsp = '0';
-		prec--;
+		i++;
 	}
-	while (prec > i++)
+	while (prec > i)
+	{
+		i++;
 		to_add = ft_addchar(&to_add, '0');
+	}
 	to_del = *to_dsp;
 	*to_dsp = ft_strfuse(&to_add, *to_dsp);
 	ft_strdel(&to_del);
@@ -38,7 +40,7 @@ int		ft_add_precision(int i, int prec, char **to_dsp)
 void	ft_handle_null(char *flags, char **padding, char **to_dsp, char **to_del)
 {
 	*to_del = ft_makestr(" ");
-	if (ft_detect(flags, '0') && !ft_detect(flags, '-'))
+	if (ft_detect_0(flags) && !ft_detect(flags, '-'))
 	{
 		**padding = '0';
 		if (**to_dsp == '+' || **to_dsp == '-')
@@ -128,10 +130,11 @@ int	ft_putnbr_printf(int n, char *flags)
 	int		width;
 	char	*padding;
 
-	to_dsp = ft_strnew(0);
-	padding = ft_makestr(" ");
+	ft_initialise(&to_dsp, &padding);
 	i = ft_sign_cases(&n, flags, &to_dsp);
 	i += ft_add_precision(ft_process(n, &to_dsp), ft_getprec(flags), &to_dsp);
+	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0)
+		ft_set_to_null(&i, &to_dsp);
 	if ((width = ft_getwidth(flags) - i) > 0)
 	{
 		if (ft_detect(flags, '-'))

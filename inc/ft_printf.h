@@ -25,14 +25,14 @@ void	ft_strnput(char *str, int n);
 int		ft_putnbr_lhex(long int n);
 int		ft_putnbr_l(intmax_t n, char *flags);
 int		ft_putnbr_loct(unsigned long int n, char *flags);
-int		ft_putunbr_l(unsigned long int n);
+int		ft_putunbr_l(uintmax_t n, char *flags);
 int		ft_putwstr(wchar_t *wstr);
 int		ft_process_flag(const char **format, va_list vlst);
 int		ft_putnbr_printf(int n, char *flags);
 int		ft_putstr(char const *s);
-int		ft_putunbr(unsigned int n);
+int		ft_putunbr(unsigned int n, char *flags);
 int		ft_putnbr_hex(unsigned int n, char *flags);
-int		ft_putnbr_oct(unsigned int n, char *flags);
+int		ft_putnbr_oct(int n, char *flags);
 int		ft_putnbr_mhex(unsigned int n, char *flags);
 int		ft_putwchar(wchar_t wc);
 short	ft_detect(char *flags, char to_find);
@@ -43,5 +43,9 @@ int 	ft_handle_wdth(int width, char **padding, char **to_del, char **to_dsp);
 int 	ft_padding_right(char **to_dsp, int width, int i);
 int		ft_count(char *flags, char to_find);
 int		ft_getprec(char *flags);
+short	ft_detect_0(char *flags);
+int		ft_add_precision(int i, int prec, char **to_dsp);
+void	ft_set_to_null(int *i, char **to_dsp);
+void	ft_initialise(char **to_dsp, char **padding);
 
 #endif

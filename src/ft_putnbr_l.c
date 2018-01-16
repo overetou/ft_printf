@@ -16,13 +16,13 @@
 
 static int ft_sign_cases(intmax_t *n, char *flags, char **to_dsp)
 {
+	if (*n == LONG_MIN)
+	{
+		ft_putstr("-9223372036854775808");
+		return (20);
+	}
 	if (*n < 0)
 	{
-		if (*n == LONG_MIN)
-		{
-			*to_dsp = ft_makestr("-9223372036854775808");
-			return (20);
-		}
 		*n = -(*n);
 		*to_dsp = ft_addchar(to_dsp, '-');
 		return (1);
@@ -69,11 +69,12 @@ int			ft_putnbr_l(intmax_t n, char *flags)
 	int		width;
 	char	*padding;
 
-	to_dsp = ft_strnew(0);
-	padding = ft_makestr(" ");
-	i = ft_sign_cases(&n, flags, &to_dsp);
-	if (i != 20)
-		i += ft_process(n, &to_dsp);
+	ft_initialise(&to_dsp, &padding);
+	if ((i = ft_sign_cases(&n, flags, &to_dsp)) == 20)
+		return(20);
+	i += ft_add_precision(ft_process(n, &to_dsp), ft_getprec(flags), &to_dsp);
+	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0)
+		ft_set_to_null(&i, &to_dsp);
 	if ((width = ft_getwidth(flags) - i) > 0)
 	{
 		if (ft_detect(flags, '-'))
