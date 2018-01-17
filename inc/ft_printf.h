@@ -50,5 +50,8 @@ void	ft_initialise(char **to_dsp, char **padding);
 int		ft_add_precision_x(int i, int prec, char **to_dsp, char *flags);
 int		ft_handle_wdth_x(int width, char **padding, char **to_del, char **to_dsp);
 void	ft_handle_null_x(char *flags, char **padding, char **to_dsp, char **to_del);
+int		ft_add_precision_mx(int i, int prec, char **to_dsp, char *flags);
+void	ft_handle_null_mx(char *flags, char **padding, char **to_dsp, char **to_del);
+int		ft_putnbr_mlhex(uintmax_t n, char *flags);
 
 #endif

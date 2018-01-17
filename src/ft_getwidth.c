@@ -141,6 +141,46 @@ int	ft_add_precision_x(int i, int prec, char **to_dsp, char *flags)
 	return (i);
 }
 
+int	ft_add_precision_mx(int i, int prec, char **to_dsp, char *flags)
+{
+	char *to_add;
+	char *to_del;
+
+	if (prec <= i)
+		return (i);
+	to_add = ft_strnew(0);
+	if (ft_detect(flags, '#'))
+	{
+		to_add = ft_strfuse(&to_add, "0X");
+		(*to_dsp)[1] = '0';
+		i += 2;
+	}
+	while (prec > i)
+	{
+		i++;
+		to_add = ft_addchar(&to_add, '0');
+	}
+	to_del = *to_dsp;
+	*to_dsp = ft_strfuse(&to_add, *to_dsp);
+	ft_strdel(&to_del);
+	return (i);
+}
+
+void	ft_handle_null_mx(char *flags, char **padding, char **to_dsp, char **to_del)
+{
+	if (ft_detect_0(flags))
+	{
+		**padding = '0';
+		if (ft_detect(flags, '#'))
+		{
+			*to_del = ft_makestr("0X");
+			(*to_dsp)[1] = '0';
+			return ;
+		}
+	}
+	*to_del = ft_makestr(" ");
+}
+
 int ft_padding_right(char **to_dsp, int width, int i)
 {
 	ft_putstr(*to_dsp);
