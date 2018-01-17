@@ -22,7 +22,7 @@ char	*ft_addchar(char **str, char c);
 char	*ft_unbr_to_str(size_t n, int *sz);
 char	*ft_char_to_str(char c, int *sz);
 void	ft_strnput(char *str, int n);
-int		ft_putnbr_lhex(long int n);
+int		ft_putnbr_lhex(uintmax_t n, char *flags);
 int		ft_putnbr_l(intmax_t n, char *flags);
 int		ft_putnbr_loct(unsigned long int n, char *flags);
 int		ft_putunbr_l(uintmax_t n, char *flags);
@@ -47,5 +47,8 @@ short	ft_detect_0(char *flags);
 int		ft_add_precision(int i, int prec, char **to_dsp);
 void	ft_set_to_null(int *i, char **to_dsp);
 void	ft_initialise(char **to_dsp, char **padding);
+int		ft_add_precision_x(int i, int prec, char **to_dsp, char *flags);
+int		ft_handle_wdth_x(int width, char **padding, char **to_del, char **to_dsp);
+void	ft_handle_null_x(char *flags, char **padding, char **to_dsp, char **to_del);
 
 #endif

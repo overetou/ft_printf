@@ -6,7 +6,7 @@ int main(void)
 {
 	int i;
 
-	i = printf("%#o", 0);
+	i = ft_printf("%#08x", 42);
 	printf("\n%d", i);
 	return (0);	
 }

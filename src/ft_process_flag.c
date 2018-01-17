@@ -67,6 +67,24 @@ static int ft_sort_o(char *flags, va_list vlst)
 		return (ft_putnbr_oct(va_arg(vlst, unsigned int), flags));
 }
 
+static int ft_sort_x(char *flags, va_list vlst)
+{
+	if (ft_count(flags, 'h') == 1)
+		return (ft_putnbr_hex((unsigned short)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'h') == 2)
+		return (ft_putnbr_hex((unsigned char)va_arg(vlst, int), flags));
+	else if (ft_count(flags, 'z'))
+		return (ft_putnbr_lhex((size_t)va_arg(vlst, uintmax_t), flags));
+	else if (ft_count(flags, 'l') == 1)
+		return (ft_putnbr_lhex((unsigned long int)va_arg(vlst, uintmax_t), flags));
+	else if (ft_count(flags, 'l') == 2)
+		return (ft_putnbr_lhex((unsigned long long int)va_arg(vlst, uintmax_t), flags));
+	else if (ft_detect(flags, 'j'))
+		return (ft_putnbr_lhex(va_arg(vlst, uintmax_t), flags));
+	else
+		return (ft_putnbr_hex(va_arg(vlst, unsigned int), flags));
+}
+
 static char	ft_find_conv(const char *format)
 {
 	while (*format && *format != 's' && *format != 'd' && *format != 'i' && *format != 'u'
@@ -107,7 +125,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'c')
 		i = ft_putchar((char)va_arg(vlst, char*));
 	else if (conv == 'x')
-		i = ft_putnbr_hex(va_arg(vlst, unsigned int), flags);
+		i = ft_sort_x(flags, vlst);
 	else if (conv == 'o')
 		i = ft_sort_o(flags, vlst);
 	else if (conv == 'X')
@@ -117,7 +135,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'C')
 		i = ft_putwchar((wchar_t)va_arg(vlst, wchar_t*));
 	else if (conv == 'p')
-		i = ft_putnbr_lhex(va_arg(vlst, long int));
+		i = ft_putstr("0x") + ft_putnbr_lhex(va_arg(vlst, unsigned long int), "");
 	else if (conv == 'D')
 		i = ft_putnbr_l(va_arg(vlst, long int), flags);
 	else if (conv == 'O')
