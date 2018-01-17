@@ -53,5 +53,6 @@ void	ft_handle_null_x(char *flags, char **padding, char **to_dsp, char **to_del)
 int		ft_add_precision_mx(int i, int prec, char **to_dsp, char *flags);
 void	ft_handle_null_mx(char *flags, char **padding, char **to_dsp, char **to_del);
 int		ft_putnbr_mlhex(uintmax_t n, char *flags);
+int		ft_putnbr_p(unsigned long int n, char *flags);
 
 #endif

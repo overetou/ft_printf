@@ -153,7 +153,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'C')
 		i = ft_putwchar((wchar_t)va_arg(vlst, wchar_t*));
 	else if (conv == 'p')
-		i = ft_putstr("0x") + ft_putnbr_lhex(va_arg(vlst, unsigned long int), "");
+		i = ft_putnbr_p(va_arg(vlst, unsigned long int), flags);
 	else if (conv == 'D')
 		i = ft_putnbr_l(va_arg(vlst, long int), flags);
 	else if (conv == 'O')

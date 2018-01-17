@@ -22,7 +22,7 @@ static int	ft_process(unsigned int n, int i, char **to_dsp)
 	return (i + 1);
 }
 
-static int ft_handle_sharp(char **to_dsp, char *flags, int n)
+static int ft_handle_sharp(char **to_dsp, char *flags, unsigned int n)
 {
 	if (n == 0)
 		return (0);
