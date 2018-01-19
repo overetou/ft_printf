@@ -1,13 +1,14 @@
 #include "inc/ft_printf.h"
 #include <limits.h>
 #include <stdio.h>
+#include <locale.h>
 
 int main(void)
 {
 	int i;
 
-	i = printf("%.9p", 1234);
+	setlocale(LC_ALL, "");
+	i = ft_printf("{%010R}");
 	printf("\n%d", i);
 	return (0);	
 }
-

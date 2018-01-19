@@ -19,11 +19,15 @@ static int	ft_process(unsigned long int n, int i, char **to_dsp)
 
 static int	ft_add_precision_p(int i, int prec, char **to_dsp)
 {
+	char *to_del;
+
+	to_del = ft_makestr("0x");
 	while (prec > i)
 	{
 		i++;
-		*to_dsp = ft_strfuse(to_dsp, "0");
+		to_del = ft_strfuse(&to_del, "0");
 	}
+	*to_dsp =  ft_strfuse(&to_del, *to_dsp);
 	return (i);
 }
 
@@ -36,7 +40,6 @@ int	ft_putnbr_p(unsigned long int n, char *flags)
 	char	*padding;
 
 	ft_initialise(&to_dsp, &padding);
-	to_dsp = ft_makestr("0x");
 	i = ft_add_precision_p(ft_process(n, 0, &to_dsp), ft_getprec(flags), &to_dsp) + 2;
 	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0)
 		ft_back(&i, &to_dsp);

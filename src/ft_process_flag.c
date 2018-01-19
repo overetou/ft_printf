@@ -12,6 +12,7 @@
 
 #include "ft_printf.h"
 #include <inttypes.h>
+#include <unistd.h>
 
 static int	ft_sort_di(char *flags, va_list vlst)
 {
@@ -103,14 +104,33 @@ static int ft_sort_X(char *flags, va_list vlst)
 		return (ft_putnbr_mhex(va_arg(vlst, unsigned int), flags));
 }
 
+static int ft_sort_c(char *flags, va_list vlst)
+{
+	if (ft_detect(flags, 'l'))
+		return (ft_putwchar(va_arg(vlst, long int)));
+	return (ft_putchar_printf(va_arg(vlst, int), flags));
+}
+
+static int ft_sort_s(char *flags, va_list vlst)
+{
+	if (ft_detect(flags, 'l'))
+		return (ft_putwstr_printf(va_arg(vlst, char*), flags));
+	return (ft_putstr_printf(va_arg(vlst, char*), flags));
+}
 static char	ft_find_conv(const char *format)
 {
 	while (*format && *format != 's' && *format != 'd' && *format != 'i' && *format != 'u'
-		&& *format != '%' && *format != 'c' && *format != 'x' && *format != 'o'
-		&& *format != 'X' && *format != 'S' && *format != 'S' && *format != 'S'
-		&& *format != 'C' && *format != 'p' && *format != 'D' && *format != 'O'
-		&& *format != 'U')
-		format++;
+	&& *format != '%' && *format != 'c' && *format != 'x' && *format != 'o'
+	&& *format != 'X' && *format != 'S' && *format != 'S' && *format != 'S'
+	&& *format != 'C' && *format != 'p' && *format != 'D' && *format != 'O'
+	&& *format != 'U')
+	{
+		if (*format != '+' && *format != '-' && *format != ' ' && *format != '#' && *format != 'l'
+		&& *format != 'h' && *format != 'z' && *format != 'j' && *format != '0' && (*format < '0'
+		|| *format > '9') && *format != '.')
+			return (*format);
+		format++;	
+	}
 	return (*format);
 }
 
@@ -133,7 +153,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 
 	i = 0;
 	if (conv == 's')
-		i = ft_putstr(va_arg(vlst, char*));
+		i = ft_sort_s(flags, vlst);
 	else if (conv == 'd' || conv == 'i')
 		i = ft_sort_di(flags, vlst);
 	else if (conv == 'u')
@@ -141,7 +161,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == '%')
 		i = ft_putpercent(flags);
 	else if (conv == 'c')
-		i = ft_putchar((char)va_arg(vlst, char*));
+		i = ft_sort_c(flags, vlst);
 	else if (conv == 'x')
 		i = ft_sort_x(flags, vlst);
 	else if (conv == 'o')
@@ -149,7 +169,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'X')
 		i = ft_sort_X(flags, vlst);
 	else if (conv == 'S')
-		i = ft_putwstr(va_arg(vlst, wchar_t*));
+		i = ft_putwstr_printf(va_arg(vlst, char*), flags);
 	else if (conv == 'C')
 		i = ft_putwchar((wchar_t)va_arg(vlst, wchar_t*));
 	else if (conv == 'p')
@@ -162,7 +182,6 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 		i = ft_putunbr_l(va_arg(vlst, unsigned long int), flags);
 	else
 		return (-1);
-	ft_strdel(&flags);
 	return (i);
 }
 
@@ -170,11 +189,20 @@ int		ft_process_flag(const char **format, va_list vlst)
 {
 	char	conv;
 	char	*flags;
+	int 	ret;
 
 	(*format)++;
 	conv = ft_find_conv(*format);
-	if (conv == 0)
-		return (0);
+	if (conv == '\0')
+	{
+		while (**format == '+' || **format == '-' || **format == ' ' || **format == '#' || **format == 'l'
+		|| **format == 'h' || **format == 'z' || **format == 'j' || **format == '0' || (**format >= '0'
+		&& **format <= '9') || **format == '.')
+			(*format)++;
+		return (-1);
+	}
 	flags = ft_find_flags(format, conv);
-	return (ft_process_conv(conv, vlst, flags));
+	ret = ft_process_conv(conv, vlst, flags);
+	ft_strdel(&flags);
+	return (ret);
 }

@@ -26,10 +26,9 @@ int		ft_putnbr_lhex(uintmax_t n, char *flags);
 int		ft_putnbr_l(intmax_t n, char *flags);
 int		ft_putnbr_loct(unsigned long int n, char *flags);
 int		ft_putunbr_l(uintmax_t n, char *flags);
-int		ft_putwstr(wchar_t *wstr);
+void	ft_putwstrn(wchar_t *wstr, int n);
 int		ft_process_flag(const char **format, va_list vlst);
 int		ft_putnbr_printf(int n, char *flags);
-int		ft_putstr(char const *s);
 int		ft_putunbr(unsigned int n, char *flags);
 int		ft_putnbr_hex(unsigned int n, char *flags);
 int		ft_putnbr_oct(int n, char *flags);
@@ -54,5 +53,9 @@ int		ft_add_precision_mx(int i, int prec, char **to_dsp, char *flags);
 void	ft_handle_null_mx(char *flags, char **padding, char **to_dsp, char **to_del);
 int		ft_putnbr_mlhex(uintmax_t n, char *flags);
 int		ft_putnbr_p(unsigned long int n, char *flags);
+int		ft_putchar_printf(char c, char *flags);
+void	ft_handle_width_c(char **padding, char **to_dsp, int *i, int width);
+int		ft_putstr_printf(char *str, char *flags);
+int			ft_putwstr_printf(char *wstr, char *flags);
 
 #endif
