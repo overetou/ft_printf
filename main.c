@@ -8,7 +8,7 @@ int main(void)
 	int i;
 
 	setlocale(LC_ALL, "");
-	i = ft_printf("{%010R}");
+	i = printf("{% 03d}", 0);
 	printf("\n%d", i);
 	return (0);	
 }

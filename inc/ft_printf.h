@@ -56,6 +56,6 @@ int		ft_putnbr_p(unsigned long int n, char *flags);
 int		ft_putchar_printf(char c, char *flags);
 void	ft_handle_width_c(char **padding, char **to_dsp, int *i, int width);
 int		ft_putstr_printf(char *str, char *flags);
-int			ft_putwstr_printf(char *wstr, char *flags);
+int		ft_putwstr_printf(char *wstr, char *flags);
 
 #endif

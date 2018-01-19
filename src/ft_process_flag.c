@@ -14,6 +14,34 @@
 #include <inttypes.h>
 #include <unistd.h>
 
+static int		ft_do_udf_bhv(char c, char *flags)
+{
+	int		i;
+	char	*to_dsp;
+	int		width;
+	char	*padding;
+
+	ft_initialise(&to_dsp, &padding);
+	to_dsp =  ft_strnew(0);
+	to_dsp = ft_addchar(&to_dsp, c);
+	i = 1;
+	if ((width = ft_getwidth(flags)) > i)
+	{
+		width--;
+		if (ft_detect(flags, '-'))
+			return (ft_padding_right(&to_dsp, width, i));
+		else
+		{
+			if (ft_detect_0(flags))
+				*padding = '0';
+			ft_handle_width_c(&padding, &to_dsp, &i, width);
+		}
+	}
+	write(1, to_dsp, i);
+	ft_strdel(&to_dsp);
+	return (i);
+}
+
 static int	ft_sort_di(char *flags, va_list vlst)
 {
 	if (ft_count(flags, 'h') == 1)
@@ -193,16 +221,18 @@ int		ft_process_flag(const char **format, va_list vlst)
 
 	(*format)++;
 	conv = ft_find_conv(*format);
-	if (conv == '\0')
-	{
-		while (**format == '+' || **format == '-' || **format == ' ' || **format == '#' || **format == 'l'
-		|| **format == 'h' || **format == 'z' || **format == 'j' || **format == '0' || (**format >= '0'
-		&& **format <= '9') || **format == '.')
-			(*format)++;
-		return (-1);
-	}
 	flags = ft_find_flags(format, conv);
 	ret = ft_process_conv(conv, vlst, flags);
+	if (ret == -1)
+	{
+		if (conv == '\0')
+		{
+			ret = 0;
+			(*format)--;
+		}
+		else
+			ret = ft_do_udf_bhv(conv, flags);
+	}
 	ft_strdel(&flags);
 	return (ret);
 }
