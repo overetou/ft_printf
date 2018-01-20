@@ -7,6 +7,18 @@ static void ft_back(int *i, char **to_dsp)
 	*i = 2;
 }
 
+static void	ft_handle_null_p(char *flags, char **padding, char **to_dsp, char **to_del)
+{
+	if (ft_detect_0(flags))
+	{
+		**padding = '0';
+		*to_del = ft_makestr("0x");
+		(*to_dsp)[1] = '0';
+		return ;
+	}
+	*to_del = ft_makestr(" ");
+}
+
 static int	ft_process(unsigned long int n, int i, char **to_dsp)
 {
 	char	base[] = "0123456789abcdef";
@@ -49,7 +61,7 @@ int	ft_putnbr_p(unsigned long int n, char *flags)
 			return (ft_padding_right(&to_dsp, width, i));
 		else
 		{
-			ft_handle_null_x(flags, &padding, &to_dsp, &to_del);
+			ft_handle_null_p(flags, &padding, &to_dsp, &to_del);
 			i += ft_handle_wdth_x(width, &padding, &to_del, &to_dsp) + 1;
 		}
 	}

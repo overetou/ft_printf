@@ -7,16 +7,10 @@ int	ft_getwidth(char *flags)
 	i = 0;
 	while (flags[i])
 	{
+		if (flags[i] == '.')
+			return (0);
 		if (flags[i] > '0' && flags[i] <= '9')
-		{
-			if (i)
-			{
-				if (flags[i - 1] != '.')
-					return (ft_atoi(flags + i));
-			}
-			else
-				return (ft_atoi(flags + i));
-		}
+			return (ft_atoi(flags + i));
 		i++;
 	}
 	return (0);
@@ -49,11 +43,11 @@ int		ft_add_precision(int i, int prec, char **to_dsp)
 
 void	ft_handle_null(char *flags, char **padding, char **to_dsp, char **to_del)
 {
-	*to_del = ft_makestr(" ");
+	*to_del = ft_makestr("x");
 	if (ft_detect_0(flags))
 	{
 		**padding = '0';
-		if (**to_dsp == '+' || **to_dsp == '-')
+		if (**to_dsp == '+' || **to_dsp == '-' || **to_dsp == ' ')
 		{
 			**to_del = **to_dsp;
 			**to_dsp = **padding;
@@ -71,11 +65,11 @@ int		ft_handle_wdth(int width, char **padding, char **to_del, char **to_dsp)
 		i++;
 		*padding = ft_addchar(padding, **padding);
 	}
-	if (**to_del != ' ')
+	if (**to_del != 'x')
 			**padding = **to_del;
-		ft_strdel(to_del);
-		*to_del = *to_dsp;
-		*to_dsp = ft_strfuse(padding, *to_dsp);
+	ft_strdel(to_del);
+	*to_del = *to_dsp;
+	*to_dsp = ft_strfuse(padding, *to_dsp);
 	ft_strdel(to_del);
 	ft_strdel(padding);
 	return (i);
@@ -211,6 +205,13 @@ short	ft_detect_0(char *flags)
 		flags++;
 	}
 	return (0);
+}
+
+char	*ft_add_bfr(char *to_add, char **to_del)
+{
+	to_add = ft_strjoin(to_add, *to_del);
+	ft_strdel(to_del);
+	return (to_add);
 }
 
 void	ft_set_to_null(int *i, char **to_dsp)

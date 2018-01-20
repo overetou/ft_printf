@@ -31,7 +31,7 @@ int		ft_process_flag(const char **format, va_list vlst);
 int		ft_putnbr_printf(int n, char *flags);
 int		ft_putunbr(unsigned int n, char *flags);
 int		ft_putnbr_hex(unsigned int n, char *flags);
-int		ft_putnbr_oct(int n, char *flags);
+int		ft_putnbr_oct(unsigned int n, char *flags);
 int		ft_putnbr_mhex(unsigned int n, char *flags);
 int		ft_putwchar(wchar_t wc);
 short	ft_detect(char *flags, char to_find);
@@ -57,5 +57,7 @@ int		ft_putchar_printf(char c, char *flags);
 void	ft_handle_width_c(char **padding, char **to_dsp, int *i, int width);
 int		ft_putstr_printf(char *str, char *flags);
 int		ft_putwstr_printf(char *wstr, char *flags);
+char	*ft_add_bfr(char *to_add, char **to_del);
+short	ft_detect_0ud(char *flags);
 
 #endif

@@ -25,7 +25,7 @@ int			ft_putstr_printf(char *str, char *flags)
 		write(1, "(null)", 6);
 		return (6);
 	}
-	ft_initialise(&to_dsp, &padding);
+	padding = ft_makestr(" ");
 	i = (int)ft_strlen(str);
 	to_dsp = ft_strnew(i);
 	ft_strcpy(to_dsp, str);
@@ -36,7 +36,7 @@ int			ft_putstr_printf(char *str, char *flags)
 		if (ft_detect(flags, '-'))
 			return (ft_padding_right(&to_dsp, width - i, i));
 		width--;
-		if (ft_detect_0(flags))
+		if (ft_detect(flags, '0'))
 			*padding = '0';
 		ft_handle_width_c(&padding, &to_dsp, &i, width);
 	}

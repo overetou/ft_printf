@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_process(int n, int i, char **to_dsp)
+static int	ft_process(unsigned int n, int i, char **to_dsp)
 {
 	char	base[] = "01234567";
 	
@@ -22,19 +22,19 @@ static int	ft_process(int n, int i, char **to_dsp)
 	return (i + 1);
 }
 
-static int ft_handle_sharp(char **to_dsp, char *flags, unsigned int n)
+static int ft_handle_sharp(char **to_dsp, char *flags)
 {
-	if (n == 0)
+	if (**to_dsp == '0')
 		return (0);
 	if (ft_detect(flags, '#'))
 	{
-		*to_dsp = ft_strfuse(to_dsp, "0");
+		*to_dsp = ft_add_bfr("0", to_dsp);
 		return (1);
 	}
 	return (0);
 }
 
-int	ft_putnbr_oct(int n, char *flags)
+int	ft_putnbr_oct(unsigned int n, char *flags)
 {
 	int		i;
 	char	*to_del;
@@ -43,8 +43,8 @@ int	ft_putnbr_oct(int n, char *flags)
 	char	*padding;
 
 	ft_initialise(&to_dsp, &padding);
-	i = ft_handle_sharp(&to_dsp, flags, n);
-	i += ft_add_precision(ft_process(n, 0, &to_dsp), ft_getprec(flags), &to_dsp);
+	i = ft_add_precision(ft_process(n, 0, &to_dsp), ft_getprec(flags), &to_dsp);
+	i += ft_handle_sharp(&to_dsp, flags);
 	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0 && !ft_detect(flags, '#'))
 		ft_set_to_null(&i, &to_dsp);
 	if ((width = ft_getwidth(flags) - i) > 0)

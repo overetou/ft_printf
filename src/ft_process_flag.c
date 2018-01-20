@@ -14,6 +14,17 @@
 #include <inttypes.h>
 #include <unistd.h>
 
+short	ft_detect_0ud(char *flags)
+{
+	while (*flags)
+	{
+		if (*flags == '0' && (*(flags - 1) < '1' || *(flags - 1) > '9'))
+			return (1);
+		flags++;
+	}
+	return (0);
+}
+
 static int		ft_do_udf_bhv(char c, char *flags)
 {
 	int		i;
@@ -32,7 +43,7 @@ static int		ft_do_udf_bhv(char c, char *flags)
 			return (ft_padding_right(&to_dsp, width, i));
 		else
 		{
-			if (ft_detect_0(flags))
+			if (ft_detect_0ud(flags))
 				*padding = '0';
 			ft_handle_width_c(&padding, &to_dsp, &i, width);
 		}
@@ -187,7 +198,7 @@ int	ft_process_conv(char conv, va_list vlst, char *flags)
 	else if (conv == 'u')
 		i = ft_sort_u(flags, vlst);
 	else if (conv == '%')
-		i = ft_putpercent(flags);
+		i = ft_putchar_printf('%', flags);
 	else if (conv == 'c')
 		i = ft_sort_c(flags, vlst);
 	else if (conv == 'x')
