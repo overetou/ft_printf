@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_process(unsigned int n, char **to_dsp)
+static int	ft_process(unsigned int n, char **dsp)
 {
 	int	mem;
 	int	div;
@@ -25,36 +25,37 @@ static int	ft_process(unsigned int n, char **to_dsp)
 	while (div != 0)
 	{
 		mem = (n / div);
-		*to_dsp = ft_addchar(to_dsp, mem + '0');
+		*dsp = ft_addchar(dsp, mem + '0');
 		n = n - (mem * div);
 		div = div / 10;
 		i++;
 	}
 	return (i);
 }
-int	ft_putunbr(unsigned int n, char *flags)
+
+int			ft_pun(unsigned int n, char *flags)
 {
 	int		i;
-	char	*to_del;
-	char	*to_dsp;
+	char	*del;
+	char	*dsp;
 	int		width;
-	char	*padding;
+	char	*pad;
 
-	ft_initialise(&to_dsp, &padding);
-	i = ft_add_precision(ft_process(n, &to_dsp), ft_getprec(flags), &to_dsp);
+	ft_initialise(&dsp, &pad);
+	i = ft_add_precision(ft_process(n, &dsp), ft_getprec(flags), &dsp);
 	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0)
-		ft_set_to_null(&i, &to_dsp);
+		ft_set_to_null(&i, &dsp);
 	if ((width = ft_getwidth(flags) - i) > 0)
 	{
 		if (ft_detect(flags, '-'))
-			return (ft_padding_right(&to_dsp, width, i));
+			return (ft_pad_right(&dsp, width, i));
 		else
 		{
-			ft_handle_null(flags, &padding, &to_dsp, &to_del);
-			i += ft_handle_wdth(width, &padding, &to_del, &to_dsp) + 1;
+			ft_handle_null(flags, &pad, &dsp, &del);
+			i += ft_handle_wdth(width, &pad, &del, &dsp) + 1;
 		}
 	}
-	ft_putstr(to_dsp);
-	ft_strdel(&to_dsp);
+	ft_putstr(dsp);
+	ft_strdel(&dsp);
 	return (i);
 }

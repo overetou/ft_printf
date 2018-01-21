@@ -26,8 +26,8 @@ size_t	ft_print_until_flag(const char *format)
 int		ft_printf(char const *format, ...)
 {
 	va_list	vlst;
-	int s;
-	int i;
+	int		s;
+	int		i;
 
 	va_start(vlst, format);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: overetou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:45:07 by overetou          #+#    #+#             */
-/*   Updated: 2017/11/10 11:45:20 by overetou         ###   ########.fr       */
+/*   Updated: 2018/01/21 15:43:16 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <string.h>
 # include <wchar.h>
-
 
 typedef struct	s_list
 {

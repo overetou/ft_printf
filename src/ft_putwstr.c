@@ -31,7 +31,7 @@ static int	wft_strlen(wchar_t *wstr)
 	return (sz);
 }
 
-static int	ft_count_oct(wchar_t *wstr, int prec, char **dspleft)
+static int	ft_cnt_oct(wchar_t *wstr, int prec)
 {
 	int sz;
 	int add;
@@ -40,7 +40,6 @@ static int	ft_count_oct(wchar_t *wstr, int prec, char **dspleft)
 	i = 0;
 	sz = 0;
 	add = 0;
-	(void)dspleft;
 	while (prec >= add + sz && wstr[i] != 0)
 	{
 		sz += add;
@@ -79,44 +78,39 @@ static int	ft_putwstr(wchar_t *wstr, int n, int p, int prec)
 	return (i);
 }
 
-static int ft_padding_right_S(char *wstr, int width, int i)
+static int	ft_pad_right_ss(wchar_t *wstr, int width, int i)
 {
 	int printed;
 
-	printed = ft_putwstr((wchar_t*)wstr, i, 0, 0);
+	printed = ft_putwstr(wstr, i, 0, 0);
 	while (width--)
 		printed += ft_putchar(' ');
 	return (printed);
 }
 
-int			ft_putwstr_printf(char *wstr, char *flags)
+int			ft_putwstr_printf(wchar_t *wstr, char *flags)
 {
 	int		i;
 	int		width;
 	char	*dspleft;
-	char	*padding;
+	char	*pad;
 	int		prec;
 
 	width = ft_getwidth(flags);
 	dspleft = ft_strnew(0);
+	prec = ft_getprec(flags);
 	if (!wstr && !width && !ft_detect(flags, '.'))
 		return (ft_putstr("(null)"));
-	if (ft_detect(flags, '.'))
-	{
-		prec = ft_getprec(flags);
-		i = ft_count_oct((wchar_t*)wstr, prec, &dspleft);
-	}
-	else
-		i = wft_strlen((wchar_t*)wstr);
+	i = (ft_detect(flags, '.') ? ft_cnt_oct(wstr, prec) : wft_strlen(wstr));
 	if ((width -= i) > 0)
 	{
 		if (ft_detect(flags, '-'))
-			return (ft_padding_right_S(wstr, width, i));
-		padding = ft_makestr((ft_detect_0ud(flags) ? "0" : " "));
+			return (ft_pad_right_ss(wstr, width, i));
+		pad = ft_makestr((ft_detect_0ud(flags) ? "0" : " "));
 		while (width--)
-			dspleft = ft_add_bfr(padding, &dspleft);
+			dspleft = ft_add_bfr(pad, &dspleft);
 	}
-	i = ft_putstr(dspleft) + ft_putwstr((wchar_t*)wstr, i, ft_detect(flags, '.'), prec);
+	i = ft_putstr(dspleft) + ft_putwstr(wstr, i, ft_detect(flags, '.'), prec);
 	ft_strdel(&dspleft);
 	return (i);
 }

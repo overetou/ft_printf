@@ -8,7 +8,7 @@ int main(void)
 	int i;
 
 	setlocale(LC_ALL, "");
-	i = ft_printf("{%05p}", 0);
+	i = ft_printf("%o", 41);
 	printf("\n%d", i);
 	return (0);	
 }
