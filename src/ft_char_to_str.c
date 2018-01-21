@@ -38,15 +38,15 @@ int		ft_sort_s(char *flags, va_list vlst)
 
 char	ft_find_conv(const char *format)
 {
-	while (*format && *format != 's' && *format != 'd' && *format != 'i' && *format != 'u'
-	&& *format != '%' && *format != 'c' && *format != 'x' && *format != 'o'
-	&& *format != 'X' && *format != 'S' && *format != 'S' && *format != 'S'
-	&& *format != 'C' && *format != 'p' && *format != 'D' && *format != 'O'
-	&& *format != 'U')
+	while (*format && *format != 's' && *format != 'd' && *format != 'i'
+	&& *format != 'u' && *format != '%' && *format != 'c' && *format != 'x'
+	&& *format != 'o' && *format != 'X' && *format != 'S' && *format != 'S'
+	&& *format != 'S' && *format != 'C' && *format != 'p' && *format != 'D'
+	&& *format != 'O' && *format != 'U')
 	{
-		if (*format != '+' && *format != '-' && *format != ' ' && *format != '#' && *format != 'l'
-		&& *format != 'h' && *format != 'z' && *format != 'j' && *format != '0' && (*format < '0'
-		|| *format > '9') && *format != '.')
+		if (*format != '+' && *format != '-' && *format != ' ' && *format != '#'
+		&& *format != 'l' && *format != 'h' && *format != 'z' && *format != 'j'
+		&& *format != '0' && (*format < '0' || *format > '9') && *format != '.')
 			return (*format);
 		format++;
 	}

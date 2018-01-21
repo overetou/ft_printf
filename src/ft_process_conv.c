@@ -12,6 +12,29 @@
 
 #include "ft_printf.h"
 
+static int	ft_process_conv_two(char conv, va_list vlst, char *flags)
+{
+	int i;
+
+	if (conv == 'X')
+		i = ft_sort_xx(flags, vlst);
+	else if (conv == 'S')
+		i = ft_putwstr_printf(va_arg(vlst, wchar_t*), flags);
+	else if (conv == 'C')
+		i = ft_handle_wchar((wchar_t)va_arg(vlst, wchar_t*), flags);
+	else if (conv == 'p')
+		i = ft_pn_p(va_arg(vlst, unsigned long int), flags);
+	else if (conv == 'D')
+		i = ft_pn_l(va_arg(vlst, long int), flags);
+	else if (conv == 'O')
+		i = ft_pn_loct(va_arg(vlst, unsigned long int), flags);
+	else if (conv == 'U')
+		i = ft_pun_l(va_arg(vlst, unsigned long int), flags);
+	else
+		return (-1);
+	return (i);
+}
+
 int			ft_process_conv(char conv, va_list vlst, char *flags)
 {
 	int i;
@@ -31,21 +54,7 @@ int			ft_process_conv(char conv, va_list vlst, char *flags)
 		i = ft_sort_x(flags, vlst);
 	else if (conv == 'o')
 		i = ft_sort_o(flags, vlst);
-	else if (conv == 'X')
-		i = ft_sort_xx(flags, vlst);
-	else if (conv == 'S')
-		i = ft_putwstr_printf(va_arg(vlst, wchar_t*), flags);
-	else if (conv == 'C')
-		i = ft_handle_wchar((wchar_t)va_arg(vlst, wchar_t*), flags);
-	else if (conv == 'p')
-		i = ft_pn_p(va_arg(vlst, unsigned long int), flags);
-	else if (conv == 'D')
-		i = ft_pn_l(va_arg(vlst, long int), flags);
-	else if (conv == 'O')
-		i = ft_pn_loct(va_arg(vlst, unsigned long int), flags);
-	else if (conv == 'U')
-		i = ft_pun_l(va_arg(vlst, unsigned long int), flags);
 	else
-		return (-1);
+		return (ft_process_conv_two(conv, vlst, flags));
 	return (i);
 }
