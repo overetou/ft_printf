@@ -77,6 +77,7 @@ int			ft_handle_wchar(wchar_t wc, char *flags)
 		pad = ft_makestr((ft_detect_0ud(flags) ? "0" : " "));
 		while (width--)
 			i += ft_putchar(*pad);
+		ft_strdel(&pad);
 	}
 	ft_putwchar(wc);
 	return (i);

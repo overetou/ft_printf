@@ -62,7 +62,7 @@ int			ft_pn_printf(int n, char *flags)
 	int		width;
 	char	*pad;
 
-	ft_initialise(&dsp, &pad);
+	dsp = ft_strnew(0);
 	i = ft_sign_cases(&n, flags, &dsp);
 	i += ft_add_precision(ft_process(n, &dsp), ft_getprec(flags), &dsp);
 	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0)

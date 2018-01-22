@@ -57,5 +57,6 @@ int			ft_pun_l(uintmax_t n, char *flags)
 	}
 	ft_putstr(dsp);
 	ft_strdel(&dsp);
+	ft_strdel(&pad);
 	return (i);
 }

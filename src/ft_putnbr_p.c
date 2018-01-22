@@ -45,6 +45,7 @@ static int	ft_process(unsigned long int n, int i, char **dsp)
 static int	ft_add_precision_p(int i, int prec, char **dsp)
 {
 	char *del;
+	char *clean;
 
 	del = ft_makestr("0x");
 	while (prec > i)
@@ -52,7 +53,9 @@ static int	ft_add_precision_p(int i, int prec, char **dsp)
 		i++;
 		del = ft_strfuse(&del, "0");
 	}
+	clean = *dsp;
 	*dsp = ft_strfuse(&del, *dsp);
+	ft_strdel(&clean);
 	return (i);
 }
 
@@ -65,7 +68,8 @@ int			ft_pn_p(unsigned long int n, char *flags)
 	char	*pad;
 
 	ft_initialise(&dsp, &pad);
-	i = ft_add_precision_p(ft_process(n, 0, &dsp), ft_getprec(flags), &dsp) + 2;
+	i = ft_process(n, 0, &dsp);
+	i = ft_add_precision_p(i, ft_getprec(flags), &dsp) + 2;
 	if (ft_detect(flags, '.') && ft_getprec(flags) == 0 && n == 0)
 		ft_back(&i, &dsp);
 	if ((width = ft_getwidth(flags) - i) > 0)
@@ -80,5 +84,6 @@ int			ft_pn_p(unsigned long int n, char *flags)
 	}
 	ft_putstr(dsp);
 	ft_strdel(&dsp);
+	ft_strdel(&pad);
 	return (i);
 }

@@ -22,7 +22,6 @@ static int	ft_do_udf_bhv(char c, char *flags)
 	char	*pad;
 
 	ft_initialise(&dsp, &pad);
-	dsp = ft_strnew(0);
 	dsp = ft_addchar(&dsp, c);
 	i = 1;
 	if ((width = ft_getwidth(flags)) > i)
@@ -39,6 +38,7 @@ static int	ft_do_udf_bhv(char c, char *flags)
 	}
 	write(1, dsp, i);
 	ft_strdel(&dsp);
+	ft_strdel(&pad);
 	return (i);
 }
 

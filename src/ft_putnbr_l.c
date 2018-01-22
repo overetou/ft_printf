@@ -69,7 +69,7 @@ int			ft_pn_l(intmax_t n, char *flags)
 	int		width;
 	char	*pad;
 
-	ft_initialise(&dsp, &pad);
+	dsp = ft_strnew(0);
 	if ((i = ft_sign_cases(&n, flags, &dsp)) == 20)
 		return (20);
 	i += ft_add_precision(ft_process(n, &dsp), ft_getprec(flags), &dsp);

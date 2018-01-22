@@ -60,5 +60,6 @@ int			ft_pn_mhex(unsigned int n, char *flags)
 	}
 	ft_putstr(dsp);
 	ft_strdel(&dsp);
+	ft_strdel(&pad);
 	return (i);
 }

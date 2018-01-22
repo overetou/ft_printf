@@ -43,7 +43,7 @@ int			ft_pn_loct(uintmax_t n, char *flags)
 	int		width;
 	char	*pad;
 
-	ft_initialise(&dsp, &pad);
+	dsp = ft_strnew(0);
 	i = ft_handle_sharp(&dsp, flags, n);
 	i += ft_add_precision(ft_process(n, 0, &dsp), ft_getprec(flags), &dsp);
 	if (ft_detect(flags, '.') && ft_getprec(flags) == 0

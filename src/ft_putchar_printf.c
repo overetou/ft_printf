@@ -32,7 +32,6 @@ int		ft_putchar_printf(char c, char *flags)
 	char	*pad;
 
 	ft_initialise(&dsp, &pad);
-	dsp = ft_strnew(0);
 	dsp = ft_addchar(&dsp, c);
 	i = 1;
 	if ((width = ft_getwidth(flags)) > i)
@@ -49,5 +48,6 @@ int		ft_putchar_printf(char c, char *flags)
 	}
 	write(1, dsp, i);
 	ft_strdel(&dsp);
+	ft_strdel(&pad);
 	return (i);
 }

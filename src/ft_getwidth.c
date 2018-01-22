@@ -58,13 +58,15 @@ void	ft_handle_null(char *flags, char **pad, char **dsp, char **del)
 	*del = ft_makestr("x");
 	if (ft_detect_0(flags))
 	{
-		**pad = '0';
+		*pad = ft_makestr("0");
 		if (**dsp == '+' || **dsp == '-' || **dsp == ' ')
 		{
 			**del = **dsp;
-			**dsp = **pad;
+			**dsp = '0';
 		}
+		return ;
 	}
+	*pad = ft_makestr(" ");
 }
 
 int		ft_handle_wdth(int width, char **pad, char **del, char **dsp)
