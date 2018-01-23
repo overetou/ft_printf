@@ -39,9 +39,21 @@ int		ft_pad_right(char **dsp, int width, int i)
 
 void	ft_set_to_null(int *i, char **dsp)
 {
-	*i = 0;
+	char save[2];
+
+	*save = **dsp;
+	save[1] = '\0';
 	ft_strdel(dsp);
-	*dsp = ft_strnew(0);
+	if (*save == '+' || *save == '-' || *save == ' ')
+	{
+		*i = 1;
+		*dsp = ft_makestr(save);
+	}
+	else
+	{
+		*dsp = ft_strnew(0);
+		*i = 0;
+	}
 }
 
 void	ft_initialise(char **dsp, char **pad)

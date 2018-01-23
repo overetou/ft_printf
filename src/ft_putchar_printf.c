@@ -13,6 +13,17 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
+int		ft_pad_right_c(char c, int width, char **dsp)
+{
+	int i;
+
+	ft_strdel(dsp);
+	i = ft_putchar(c);
+	while (width--)
+		i += ft_putchar(' ');
+	return (i);
+}
+
 void	ft_handle_width_c(char **pad, char **dsp, int *i, int width)
 {
 	char *to_del;
@@ -38,10 +49,10 @@ int		ft_putchar_printf(char c, char *flags)
 	{
 		width--;
 		if (ft_detect(flags, '-'))
-			return (ft_pad_right(&dsp, width, i));
+			return (ft_pad_right_c(c, width, &dsp));
 		else
 		{
-			if (ft_detect(flags, '0'))
+			if (ft_detect_0ud(flags))
 				*pad = '0';
 			ft_handle_width_c(&pad, &dsp, &i, width);
 		}

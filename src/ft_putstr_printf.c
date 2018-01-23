@@ -33,22 +33,20 @@ int			ft_putstr_printf(char *str, char *flags)
 	int		prec;
 
 	if (!str && !ft_getwidth(flags) && !ft_detect(flags, '.'))
-		return (ft_putstr("(null)"));
-	i = (int)ft_strlen(str);
-	dsp = ft_makestr(str);
-	pad = ft_makestr(" ");
+		dsp = ft_makestr("(null)");
+	else
+		dsp = ft_makestr(str);
+	i = (int)ft_strlen(dsp);
 	if ((prec = ft_getprec(flags)) < i && ft_detect(flags, '.'))
 		ft_truncate(&dsp, &i, prec);
 	if ((width = ft_getwidth(flags)) > i)
 	{
 		if (ft_detect(flags, '-'))
 			return (ft_pad_right(&dsp, width - i, i));
-		if (ft_detect_0ud(flags))
-			*pad = '0';
+		pad = ft_makestr(ft_detect_0ud(flags) ? "0" : " ");
 		ft_handle_width_c(&pad, &dsp, &i, width - 1);
 	}
 	write(1, dsp, i);
 	ft_strdel(&dsp);
-	ft_strdel(&pad);
 	return (i);
 }

@@ -23,8 +23,10 @@ int			ft_add_prec_mx(int i, int prec, char **dsp, char *flags)
 	if (ft_detect(flags, '#'))
 	{
 		to_add = ft_strfuse(&to_add, "0X");
-		(*dsp)[1] = '0';
-		i += 2;
+		del = ft_makestr((*dsp) + 2);
+		ft_strdel(dsp);
+		*dsp = ft_makestr(del);
+		ft_strdel(&del);
 	}
 	while (prec > i)
 	{
@@ -44,9 +46,8 @@ void		ft_handle_null_mx(char *flags, char **pad, char **dsp, char **del)
 		**pad = '0';
 		if (ft_detect(flags, '#'))
 		{
-			*del = ft_makestr("0X");
-			(*dsp)[1] = '0';
-			return ;
+			ft_strdel(dsp);
+			*dsp = ft_makestr("0");
 		}
 	}
 	*del = ft_makestr(" ");
