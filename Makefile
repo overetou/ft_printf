@@ -43,7 +43,7 @@ SRC_FILE = ft_printf.c ft_nbr_to_str.c ft_addchar.c ft_unbr_to_str.c \
 	ft_char_to_str.c ft_putnbr_lhex.c ft_putnbr_l.c \
 	ft_putnbr_loct.c ft_putunbr_l.c ft_putwstr.c ft_process_flag.c \
 	ft_putnbr_printf.c ft_putnbr_oct.c ft_putnbr_mhex.c \
-	ft_putunbr.c ft_putnbr_hex.c ft_putwchar.c ft_detect.c ft_getwidth.c \
+	ft_putunbr.c ft_pn_hex.c ft_putwchar.c ft_detect.c ft_getwidth.c \
 	ft_putnbr_mlhex.c ft_putnbr_p.c ft_putchar_printf.c \
 	ft_putstr_printf.c ft_sort_diuox.c ft_process_conv.c
 

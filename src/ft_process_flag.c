@@ -72,6 +72,8 @@ int			ft_process_flag(const char **format, va_list vlst)
 			ret = 0;
 			(*format)--;
 		}
+		else if (conv == 'C')
+			ret = -1;
 		else
 			ret = ft_do_udf_bhv(conv, flags);
 	}

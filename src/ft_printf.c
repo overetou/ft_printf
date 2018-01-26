@@ -39,6 +39,8 @@ int		ft_printf(char const *format, ...)
 		if (*format)
 		{
 			s = ft_process_flag(&format, vlst);
+			if (s == -1)
+				return (-1);
 			format++;
 			i += s;
 		}

@@ -13,6 +13,34 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
+static int ft_four_oct(char **wstring, wchar_t wc, int n)
+{
+	wchar_t	cut;
+	
+	cut = wc >> 6;
+	if (wc < 65536)
+	{
+		n = 3;
+		(*wstring)[0] = 224 | (cut >> 6);
+		(*wstring)[1] = 128 | (cut ^ ((cut >> 6) << 6));
+		(*wstring)[2] = 128 | (wc ^ (cut << 6));
+		write(1, *wstring, n);
+	}
+	else if (wc < 1048576)
+	{
+		n = 4;
+		(*wstring)[0] = 240 | (cut >> 12);
+		(*wstring)[1] = 128 | ((cut >> 6) ^ ((cut >> 12) << 6));
+		(*wstring)[2] = 128 | (cut ^ ((cut >> 6) << 6));
+		(*wstring)[3] = 128 | (wc ^ ((wc >> 6) << 6));
+		write(1, *wstring, n);
+	}
+	else
+		n = -1;
+	ft_strdel(wstring);
+	return (n);
+}
+
 static int	ft_count_oct(wchar_t wc)
 {
 	if (wc < 128)
@@ -38,9 +66,9 @@ static int	ft_pad_right_ss(wchar_t wc, int width)
 int			ft_putwchar(wchar_t wc)
 {
 	int		n;
-	char	wstring[4];
-	wchar_t	cut;
+	char	*wstring;
 
+	wstring = ft_strnew(4);
 	n = 1;
 	if (wc < 128)
 		wstring[0] = wc;
@@ -50,15 +78,10 @@ int			ft_putwchar(wchar_t wc)
 		wstring[0] = 192 | (wc >> 6);
 		wstring[1] = 128 | (wc ^ ((wc >> 6) << 6));
 	}
-	else if (wc < 65536)
-	{
-		n = 3;
-		cut = wc >> 6;
-		wstring[0] = 224 | (cut >> 6);
-		wstring[1] = 128 | (cut ^ ((cut >> 6) << 6));
-		wstring[2] = 128 | (wc ^ (cut << 6));
-	}
-	write(1, &wstring, n);
+	else
+		return (ft_four_oct(&wstring, wc, n));
+	write(1, wstring, n);
+	ft_strdel(&wstring);
 	return (n);
 }
 
