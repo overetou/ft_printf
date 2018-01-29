@@ -28,6 +28,8 @@ void	ft_handle_width_c(char **pad, char **dsp, int *i, int width)
 {
 	char *to_del;
 
+	if (!dsp)
+		return ;
 	while (width > (*i)++)
 		*pad = ft_addchar(pad, **pad);
 	to_del = *dsp;

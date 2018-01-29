@@ -12,11 +12,12 @@
 
 #include "ft_printf.h"
 #include <unistd.h>
+#include <stdlib.h>
 
-static int ft_four_oct(char **wstring, wchar_t wc, int n)
+static int	ft_four_oct(char **wstring, wchar_t wc, int n)
 {
 	wchar_t	cut;
-	
+
 	cut = wc >> 6;
 	if (wc < 65536)
 	{
@@ -26,7 +27,7 @@ static int ft_four_oct(char **wstring, wchar_t wc, int n)
 		(*wstring)[2] = 128 | (wc ^ (cut << 6));
 		write(1, *wstring, n);
 	}
-	else if (wc < 1048576)
+	else if (wc < 2097152)
 	{
 		n = 4;
 		(*wstring)[0] = 240 | (cut >> 12);
@@ -43,14 +44,19 @@ static int ft_four_oct(char **wstring, wchar_t wc, int n)
 
 static int	ft_count_oct(wchar_t wc)
 {
+	int n;
+
 	if (wc < 128)
-		return (1);
+		n = 1;
 	else if (wc < 2048)
-		return (2);
+		n = 2;
 	else if (wc < 65536)
-		return (3);
+		n = 3;
+	else if (wc < 2097152)
+		n = 4;
 	else
-		return (0);
+		n = -1;
+	return (n);
 }
 
 static int	ft_pad_right_ss(wchar_t wc, int width)

@@ -26,6 +26,8 @@ static int	wft_strlen(wchar_t *wstr)
 			sz += 2;
 		else if (*wstr < 65536)
 			sz += 3;
+		else if (*wstr < 2097152)
+			sz += 4;
 		wstr++;
 	}
 	return (sz);

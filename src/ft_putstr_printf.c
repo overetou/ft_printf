@@ -17,6 +17,8 @@ static void	ft_truncate(char **dsp, int *i, int prec)
 {
 	char *to_del;
 
+	if (!dsp)
+		return ;
 	to_del = *dsp;
 	*dsp = ft_strnew(prec);
 	ft_strncpy(*dsp, to_del, prec);
